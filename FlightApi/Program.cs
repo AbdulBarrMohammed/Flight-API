@@ -26,6 +26,7 @@ app.Run(); */
 
 
 using FlightApi.Data;
+using FlightApi.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +37,7 @@ builder.Services.AddControllers(); //added code
 
 //NEW
 builder.Services.AddDbContext<FlightsDbContext>(opt => opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IFlightService, FlightService>();
 
 var app = builder.Build();
 
