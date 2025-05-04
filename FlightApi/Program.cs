@@ -25,11 +25,17 @@ app.MapControllers();
 app.Run(); */
 
 
+using FlightApi.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer(); //swagger
 builder.Services.AddSwaggerGen(); // swagger
 builder.Services.AddControllers(); //added code
+
+//NEW
+builder.Services.AddDbContext<FlightsDbContext>(opt => opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
