@@ -21,27 +21,50 @@ namespace FlightApi.Services
 
         public Flight CreateFlight(Flight flight)
         {
-            throw new NotImplementedException();
+            var savedFlight = _dbContext.Flights.Add(flight);
+            _dbContext.SaveChanges();
+            return savedFlight.Entity;
         }
 
         public string? DeleteFlights(int id)
         {
-            throw new NotImplementedException();
+            Flight savedFlight = _dbContext.Flights.Find(id);
+
+            // Checks if flight exists
+            if (savedFlight == null)
+            {
+                return null;
+            }
+
+            _dbContext.Flights.Remove(savedFlight);
+
+            return $"Successfully deleted flight with id: {id}";
         }
 
         public List<Flight> GetAllFlights()
         {
-            throw new NotImplementedException();
+            return _dbContext.Flights.ToList();
         }
 
         public Flight? GetFlightById(int id)
         {
-            throw new NotImplementedException();
+            Flight savedFlight = _dbContext.Flights.Find(id);
+            return savedFlight == null ? null : savedFlight;
         }
 
-        public Flight UpdateFlight(int id, Flight updatedFlight)
+        public Flight UpdateFlight(Flight flight)
         {
-            throw new NotImplementedException();
+            Flight savedFlight = _dbContext.Flights.Find(flight.Id);
+
+            if (savedFlight == null)
+            {
+                return null;
+            }
+
+            _dbContext.Entry(savedFlight).CurrentValues.SetValues(flight);
+            _dbContext.SaveChanges();
+
+            return savedFlight;
         }
     }
 }

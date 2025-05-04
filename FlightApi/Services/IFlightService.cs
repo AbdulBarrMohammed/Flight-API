@@ -11,7 +11,7 @@ namespace FlightApi.Services
         public List<Flight> GetAllFlights();
         public Flight? GetFlightById(int id);
         public Flight CreateFlight(Flight flight);
-        public Flight UpdateFlight(int id, Flight updatedFlight);
+        public Flight UpdateFlight(Flight updatedFlight);
         public string? DeleteFlights(int id);
     }
 }
