@@ -26,7 +26,7 @@ namespace FlightApi.Services
             return savedFlight.Entity;
         }
 
-        public string? DeleteFlights(int id)
+        public string? DeleteFlight(int id)
         {
             Flight savedFlight = _dbContext.Flights.Find(id);
 
@@ -52,9 +52,9 @@ namespace FlightApi.Services
             return savedFlight == null ? null : savedFlight;
         }
 
-        public Flight UpdateFlight(Flight flight)
+        public Flight UpdateFlight(int id, Flight flight)
         {
-            Flight savedFlight = _dbContext.Flights.Find(flight.Id);
+            Flight savedFlight = _dbContext.Flights.Find(id);
 
             if (savedFlight == null)
             {
